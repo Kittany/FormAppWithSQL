@@ -15,7 +15,7 @@ namespace FormAppWithFileIO
 {
     public partial class SignupPage : Form
     {
-        string path = @"../../HelloWorld.txt";
+        string conStr = @"Data Source=DESKTOP-VSNLTAM\SQLEXPRESS;Initial Catalog=DBProjectManager;Integrated Security=True";
         public SignupPage()
         {
             InitializeComponent();
@@ -28,14 +28,19 @@ namespace FormAppWithFileIO
                 string firstName = tbFirstName.Text, lastName = tbLastName.Text, email = tbEmail.Text,
                 pass = tbPassword.Text, RePass = tbRePassword.Text, state = tbState.Text, role = tbRole.Text;
 
-                string conStr = @"Data Source=DESKTOP-VSNLTAM\SQLEXPRESS;Initial Catalog=DBProjectManager;Integrated Security=True";
-                SqlConnection con = new SqlConnection(conStr);
-                SqlCommand comm = new SqlCommand($"INSERT INTO TBUsers(FirstName, LastName, State, Role, Email, Password, RePassword) " +
-                    $"VALUES('{firstName}','{lastName}','{state}','{role}','{email}','{pass}','{RePass}')", con);
-                con.Open();
-                int result = comm.ExecuteNonQuery();
-                con.Close();
-                MessageBox.Show((result == 1 ? "" : "not") + "Succeeded");
+                using (SqlConnection connection = new SqlConnection(conStr))
+                {
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = $"INSERT INTO TBUsers(FirstName, LastName, State, Role, Email, Password, RePassword) " +
+                    $"VALUES('{firstName}','{lastName}','{state}','{role}','{email}','{pass}','{RePass}')";
+                        connection.Open();
+                        int res = command.ExecuteNonQuery();
+                        connection.Close();
+                        MessageBox.Show((res == 1 ? "" : "not") + "Succeeded");
+                    }
+                }
                 Form1 LoginPage = new Form1();
 
                 this.Hide();

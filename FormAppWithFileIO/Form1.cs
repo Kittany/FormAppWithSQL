@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace FormAppWithFileIO
 {
     public partial class Form1 : Form
     {
-        string path = @"../../HelloWorld.txt";
+        string conStr = @"Data Source=DESKTOP-VSNLTAM\SQLEXPRESS;Initial Catalog=DBProjectManager;Integrated Security=True";
         public Form1()
         {
             InitializeComponent();
@@ -23,39 +24,32 @@ namespace FormAppWithFileIO
         {
             if (emailInput.Text != "" || passwordInput.Text != "")
             {
-                string[] lines = File.ReadAllLines(path);
 
-                foreach (string line in lines)
+                using (SqlConnection connection = new SqlConnection(conStr))
                 {
-                    int emailIndex = line.IndexOf("Email = ");
-                    int passwordIndex = line.IndexOf("Password = ");
-                    if (emailIndex == -1 || passwordIndex == -1)
-                        break;
-                    bool strEmailCut = line.Substring(emailIndex + 8, emailInput.Text.Length) == emailInput.Text;
-                    bool strPasswordCut = line.Substring(passwordIndex + 11, passwordInput.Text.Length) == passwordInput.Text;
-                    if (strEmailCut && strPasswordCut)
+                    using (SqlCommand command = new SqlCommand())
                     {
-                        MessageBox.Show("Successfully loged in");
-                        HomePage homePage = new HomePage();
-                        this.Hide();
-                        homePage.Show();
-                        return;
+                        command.Connection = connection;
+                        command.CommandText = $"Select * from TBUsers Where Email = '{emailInput.Text}' and Password = '{passwordInput.Text}'";
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        bool hasRows = reader.HasRows;
+                        connection.Close();
+
+                        if (hasRows)
+                        {
+                            MessageBox.Show("Successfully loged in");
+                            HomePage homePage = new HomePage();
+                            homePage.SetEmail(emailInput.Text);
+                            this.Hide();
+                            homePage.Show();
+                        }
+                        else
+                            MessageBox.Show("Try again...");
                     }
                 }
-
-                MessageBox.Show("Invalid login");
-
-
-                //SignupPage signupPage = new SignupPage();
-
-                // this.Hide();
-                //signupPage.Show();
             }
-            else
-                MessageBox.Show("Try again...");
-
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -69,3 +63,5 @@ namespace FormAppWithFileIO
         }
     }
 }
+
+

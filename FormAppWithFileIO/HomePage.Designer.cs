@@ -28,41 +28,62 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnShowUsers = new System.Windows.Forms.Button();
-            this.lblRes = new System.Windows.Forms.Label();
+            this.btnShowCurrentUser = new System.Windows.Forms.Button();
             this.btnGoBack = new System.Windows.Forms.Button();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnManage = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnShowUsers
+            // btnShowCurrentUser
             // 
-            this.btnShowUsers.Location = new System.Drawing.Point(125, 172);
-            this.btnShowUsers.Name = "btnShowUsers";
-            this.btnShowUsers.Size = new System.Drawing.Size(75, 23);
-            this.btnShowUsers.TabIndex = 0;
-            this.btnShowUsers.Text = "Show User";
-            this.btnShowUsers.UseVisualStyleBackColor = true;
-            this.btnShowUsers.Click += new System.EventHandler(this.btnShowUsers_Click);
-            // 
-            // lblRes
-            // 
-            this.lblRes.AutoSize = true;
-            this.lblRes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lblRes.ForeColor = System.Drawing.Color.White;
-            this.lblRes.Location = new System.Drawing.Point(125, 227);
-            this.lblRes.Name = "lblRes";
-            this.lblRes.Size = new System.Drawing.Size(21, 20);
-            this.lblRes.TabIndex = 1;
-            this.lblRes.Text = "...";
+            this.btnShowCurrentUser.Location = new System.Drawing.Point(37, 116);
+            this.btnShowCurrentUser.Name = "btnShowCurrentUser";
+            this.btnShowCurrentUser.Size = new System.Drawing.Size(107, 23);
+            this.btnShowCurrentUser.TabIndex = 0;
+            this.btnShowCurrentUser.Text = "Show Current User";
+            this.btnShowCurrentUser.UseVisualStyleBackColor = true;
+            this.btnShowCurrentUser.Click += new System.EventHandler(this.btnShowCurrentUser_Click);
             // 
             // btnGoBack
             // 
-            this.btnGoBack.Location = new System.Drawing.Point(125, 99);
+            this.btnGoBack.Location = new System.Drawing.Point(37, 31);
             this.btnGoBack.Name = "btnGoBack";
-            this.btnGoBack.Size = new System.Drawing.Size(75, 23);
+            this.btnGoBack.Size = new System.Drawing.Size(107, 23);
             this.btnGoBack.TabIndex = 2;
             this.btnGoBack.Text = "GoBack";
             this.btnGoBack.UseVisualStyleBackColor = true;
             this.btnGoBack.Click += new System.EventHandler(this.btnGoBack_Click);
+            // 
+            // dataGridView
+            // 
+            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Location = new System.Drawing.Point(471, 31);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.Size = new System.Drawing.Size(748, 265);
+            this.dataGridView.TabIndex = 3;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(471, 323);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(748, 68);
+            this.dataGridView1.TabIndex = 5;
+            // 
+            // btnManage
+            // 
+            this.btnManage.Location = new System.Drawing.Point(37, 189);
+            this.btnManage.Name = "btnManage";
+            this.btnManage.Size = new System.Drawing.Size(107, 23);
+            this.btnManage.TabIndex = 6;
+            this.btnManage.Text = "Manage";
+            this.btnManage.UseVisualStyleBackColor = true;
+            this.btnManage.Click += new System.EventHandler(this.btnManage_Click);
             // 
             // HomePage
             // 
@@ -70,20 +91,26 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(1279, 450);
+            this.Controls.Add(this.btnManage);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.btnGoBack);
-            this.Controls.Add(this.lblRes);
-            this.Controls.Add(this.btnShowUsers);
+            this.Controls.Add(this.btnShowCurrentUser);
             this.Name = "HomePage";
-            this.Text = "HomePage";
+            this.Text = "d";
+            this.Load += new System.EventHandler(this.HomePage_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnShowUsers;
-        private System.Windows.Forms.Label lblRes;
+        private System.Windows.Forms.Button btnShowCurrentUser;
         private System.Windows.Forms.Button btnGoBack;
+        private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnManage;
     }
 }
